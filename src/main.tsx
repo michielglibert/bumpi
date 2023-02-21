@@ -3,10 +3,9 @@ import ReactDOM from "react-dom/client";
 import { ChakraProvider } from "@chakra-ui/react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./routes/app";
-import { Rooms } from "./features/rooms";
-import { Standup } from "./features/standup";
-import { Summary } from "./features/summary";
+import { Rooms, Standup, Summary } from "./features/rooms";
 import theme from "./theme";
+import { RoomLayout } from "./features/rooms/components/RoomLayout";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +14,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/rooms/:roomId",
+    element: <RoomLayout />,
     children: [
       {
         path: "",
