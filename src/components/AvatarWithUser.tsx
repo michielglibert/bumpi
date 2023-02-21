@@ -9,7 +9,7 @@ export const AvatarWithUser: React.FC<Props> = ({ username }) => {
   return (
     <HStack spacing="3">
       <Avatar name={username} />
-      <Text>{username}</Text>
+      <Text fontSize="lg">{username}</Text>
     </HStack>
   );
 };

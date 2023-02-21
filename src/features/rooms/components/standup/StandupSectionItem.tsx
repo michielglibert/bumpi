@@ -5,12 +5,10 @@ interface Props {
   status: string;
 }
 
-export const StandupSection: React.FC<Props> = ({ status }) => {
+export const StandupSectionItem: React.FC<Props> = ({ status }) => {
   return (
     <VStack align="stretch">
-      <Text fontSize="xl" fontWeight="medium">
-        {status}
-      </Text>
+      <Text fontSize="xl">{status}</Text>
       <UnorderedList pl="8">
         <ListItem>Lorem ipsum dolor sit amet</ListItem>
         <ListItem>Consectetur adipiscing elit</ListItem>
