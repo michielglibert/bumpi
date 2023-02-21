@@ -1,10 +1,11 @@
 import { List, ListItem, Text, VStack } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import React from "react";
+import { AppShell } from "../components/AppShell";
 
-const Index: React.FC = () => {
+const App: React.FC = () => {
   return (
-    <VStack>
+    <AppShell>
       <Text>Routes:</Text>
       <List>
         <ListItem>
@@ -17,8 +18,8 @@ const Index: React.FC = () => {
           <Link to="/rooms/1/summary">summary</Link>
         </ListItem>
       </List>
-    </VStack>
+    </AppShell>
   );
 };
 
-export default Index;
+export default App;

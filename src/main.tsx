@@ -1,17 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
 import { ChakraProvider } from "@chakra-ui/react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Index from "./routes";
+import App from "./routes/app";
 import { Rooms } from "./features/rooms";
 import { Standup } from "./features/standup";
 import { Summary } from "./features/summary";
+import theme from "./theme";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Index />,
+    element: <App />,
   },
   {
     path: "/rooms/:roomId",
@@ -34,7 +34,7 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <RouterProvider router={router} />
     </ChakraProvider>
   </React.StrictMode>
