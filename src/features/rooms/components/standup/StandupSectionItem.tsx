@@ -1,19 +1,22 @@
 import { VStack, Text, UnorderedList, ListItem } from "@chakra-ui/react";
 import React from "react";
+import useStandupStore from "../../../../stores/standupStore";
 
 interface Props {
-  status: string;
+  category: string;
 }
 
-export const StandupSectionItem: React.FC<Props> = ({ status }) => {
+export const StandupSectionItem: React.FC<Props> = ({ category }) => {
+  const items = useStandupStore((state) => state.items);
+  const categoryItems = items.filter((item) => item.category === category);
+
   return (
     <VStack align="stretch">
-      <Text fontSize="xl">{status}</Text>
+      <Text fontSize="xl">{category}</Text>
       <UnorderedList pl="8">
-        <ListItem>Lorem ipsum dolor sit amet</ListItem>
-        <ListItem>Consectetur adipiscing elit</ListItem>
-        <ListItem>Integer molestie lorem at massa</ListItem>
-        <ListItem>Facilisis in pretium nisl aliquet</ListItem>
+        {categoryItems.map((item) => (
+          <ListItem key={item.id}>{item.text}</ListItem>
+        ))}
       </UnorderedList>
     </VStack>
   );
