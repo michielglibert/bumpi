@@ -12,9 +12,11 @@ import {
   FormControl,
   FormErrorMessage,
   FormLabel,
+  useToast,
 } from "@chakra-ui/react";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useCreateUser } from "../../../api/createUser";
 import useUserStore from "../../../stores/userStore";
 
 interface Props {
@@ -32,12 +34,23 @@ export const NamePrompt: React.FC<Props> = ({ isOpen, onClose }) => {
     formState: { errors },
     handleSubmit,
   } = useForm<FormValues>();
+  const toast = useToast();
+
+  const { mutateAsync, isLoading } = useCreateUser();
 
   const setUser = useUserStore((state) => state.setUser);
 
-  const handleConfirm = handleSubmit((data) => {
-    setUser(data.name);
-    onClose();
+  const handleConfirm = handleSubmit(async (data) => {
+    try {
+      await mutateAsync({ username: data.name });
+      setUser(data.name);
+      onClose();
+    } catch (_) {
+      toast({
+        status: "error",
+        description: "Something went wrong",
+      });
+    }
   });
 
   const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -62,7 +75,9 @@ export const NamePrompt: React.FC<Props> = ({ isOpen, onClose }) => {
           </FormControl>
         </ModalBody>
         <ModalFooter>
-          <Button onClick={handleConfirm}>Confirm</Button>
+          <Button isLoading={isLoading} onClick={handleConfirm}>
+            Confirm
+          </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
